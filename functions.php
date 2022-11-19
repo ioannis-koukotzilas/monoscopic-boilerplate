@@ -51,7 +51,7 @@ add_action('after_setup_theme', 'monoscopic_setup');
 
 function monoscopic_content_width()
 {
-	$GLOBALS['content_width'] = apply_filters('monoscopic_content_width', 640);
+	$GLOBALS['content_width'] = apply_filters('monoscopic_content_width', 2560);
 }
 add_action('after_setup_theme', 'monoscopic_content_width', 0);
 
@@ -61,9 +61,13 @@ add_action('after_setup_theme', 'monoscopic_content_width', 0);
 
 function monoscopic_scripts()
 {
-	wp_enqueue_style('monoscopic-style', get_stylesheet_uri(), array(), _MONOSCOPIC_VERSION);
+	// Styles.
+	wp_enqueue_style('style', get_stylesheet_uri(), array(), _MONOSCOPIC_VERSION);
+	wp_enqueue_style('normalize', get_template_directory_uri() . '/src/css/normalize.css', array(), '1.0.0');
+	wp_enqueue_style('app', get_template_directory_uri() . '/src/css/app.css', array(), '1.0.0');
 
-	wp_enqueue_script('monoscopic-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _MONOSCOPIC_VERSION, true);
+	// Scripts.
+	wp_enqueue_script('app', get_template_directory_uri() . '/src/js/app.js', array(), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'monoscopic_scripts');
 
